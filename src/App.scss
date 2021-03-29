@@ -19,3 +19,11 @@ body {
   display: grid;
   grid-template-columns: 2fr 10fr;
 }
+
+.content {
+  background-color: #fff;
+  min-height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+}

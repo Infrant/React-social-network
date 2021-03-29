@@ -1,0 +1,15 @@
+@import '../../variables.scss';
+
+.dialogs {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+}
+
+.dialog {
+  text-decoration: none;
+  color: $mainFontColor;
+}
+
+.active {
+  color: $mainColor;
+}

@@ -1,33 +1,51 @@
+import { NavLink } from 'react-router-dom';
 import style from './Nav.module.scss';
 
 const Nav = () => {
   return (
     <nav className={style.nav}>
-      <a href='#' className={style.link}>
+      <NavLink
+        to='/profile'
+        className={style.link}
+        activeClassName={style.active}
+      >
         <div>
           <i className='fas fa-user-circle'></i> Profile
         </div>
-      </a>
-      <a href='#' className={style.link}>
+      </NavLink>
+      <NavLink
+        to='/dialogs'
+        className={style.link}
+        activeClassName={style.active}
+      >
         <div>
           <i className='fas fa-comment'></i> Messages
         </div>
-      </a>
-      <a href='#' className={style.link}>
+      </NavLink>
+      <NavLink to='/news' className={style.link} activeClassName={style.active}>
         <div>
           <i className='fas fa-newspaper'></i> News
         </div>
-      </a>
-      <a href='#' className={style.link}>
+      </NavLink>
+
+      <NavLink
+        to='/music'
+        className={style.link}
+        activeClassName={style.active}
+      >
         <div>
           <i className='fas fa-music'></i> Music
         </div>
-      </a>
-      <a href='#' className={style.link}>
+      </NavLink>
+      <NavLink
+        to='/settings'
+        className={style.link}
+        activeClassName={style.active}
+      >
         <div>
           <i className='fas fa-cog'></i> Settings
         </div>
-      </a>
+      </NavLink>
     </nav>
   );
 };
