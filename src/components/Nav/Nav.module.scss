@@ -1,0 +1,28 @@
+@import '../../variables.scss';
+
+.nav {
+  background-color: #e9ecf1;
+  padding-right: 15px;
+}
+.link {
+  display: block;
+  border-radius: 5px;
+  text-decoration: none;
+  color: $mainFontColor;
+
+  &:hover {
+    // background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(35%, 48%, 63%, 0.2);
+    // color: #fff;
+  }
+
+  & div {
+    padding: 5px 0 5px 5px;
+    display: flex;
+    align-items: center;
+
+    & i {
+      padding-right: 10px;
+    }
+  }
+}

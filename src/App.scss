@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap');
+@import './variables.scss';
+
+body {
+  margin: 0;
+  background-color: #e9ecf1;
+  font-family: 'Lato', sans-serif;
+  color: $mainFontColor;
+}
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.grid-wrapper {
+  padding-top: 15px;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}

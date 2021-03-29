@@ -1,0 +1,23 @@
+@import '../../variables.scss';
+
+.header {
+  background-color: $mainColor;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: inline-block;
+  transform: translateX(calc((100vw - 1140px) / 2));
+  color: white;
+}
+
+.fontawesome {
+  font-size: 40px;
+  transition-duration: 0.8s;
+
+  &:hover {
+    transform: rotate(360deg);
+  }
+}
