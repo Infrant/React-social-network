@@ -5,11 +5,8 @@
   grid-template-columns: 3fr 9fr;
 }
 
-.dialog {
-  text-decoration: none;
-  color: $mainFontColor;
-}
-
-.active {
-  color: $mainColor;
+.dialogsItems {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

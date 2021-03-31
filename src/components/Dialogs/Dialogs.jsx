@@ -1,44 +1,28 @@
 import style from './Dialogs.module.scss';
-import { NavLink } from 'react-router-dom';
-import Nav from '../Nav/Nav';
+import Dialog from './Dialog/Dialog';
+import Message from './Message/Message';
+import React from 'react';
 
-const Dialogs = () => {
+const Dialogs = ({ messagesData, dialogsData }) => {
+  const msgText = React.createRef();
+
+  const sendMsg = () => {
+    alert(msgText.current.value);
+  };
+
   return (
     <div className={style.dialogs}>
       <div className={style.dialogsItems}>
-        <NavLink
-          to='/dialogs/1'
-          activeClassName={style.active}
-          className={style.dialog}
-        >
-          <div>Jhon</div>
-        </NavLink>
-        <NavLink
-          to='/dialogs/2'
-          activeClassName={style.active}
-          className={style.dialog}
-        >
-          <div>Ann</div>
-        </NavLink>
-        <NavLink
-          to='/dialogs/3'
-          activeClassName={style.active}
-          className={style.dialog}
-        >
-          <div>Peter</div>
-        </NavLink>
-        <NavLink
-          to='/dialogs/4'
-          activeClassName={style.active}
-          className={style.dialog}
-        >
-          <div>Michael</div>
-        </NavLink>
+        <Dialog dialogsData={dialogsData} />
       </div>
       <div className={style.messages}>
-        <div className={style.message}>Hi!</div>
-        <div className={style.message}>How are u!</div>
-        <div className={style.message}>I'm fine!</div>
+        <Message messagesData={messagesData} />
+        <div>
+          <textarea ref={msgText} />
+        </div>
+        <div>
+          <button onClick={sendMsg}>send message</button>
+        </div>
       </div>
     </div>
   );

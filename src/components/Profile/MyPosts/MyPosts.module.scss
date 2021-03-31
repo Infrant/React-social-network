@@ -1,0 +1,22 @@
+@import '../../../variables.scss';
+
+.sendMsgForm {
+  margin-bottom: 15px;
+  // border: 1px solid $mainColor;
+  // box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.16);
+  // border-radius: 5px;
+}
+
+.btn {
+  padding: 7px 15px;
+  background-color: $mainColor;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: lighten($mainColor, 10%);
+  }
+}

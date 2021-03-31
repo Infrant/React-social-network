@@ -1,0 +1,29 @@
+@import '../../../variables.scss';
+
+.dialog {
+  text-decoration: none;
+  color: $mainFontColor;
+  padding: 5px;
+
+  & div {
+    position: relative;
+    padding-left: 10px;
+  }
+}
+
+.active {
+  color: $mainColor;
+  transform: scale(1.1);
+
+  &::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: $mainColor;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

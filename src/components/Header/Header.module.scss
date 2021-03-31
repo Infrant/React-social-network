@@ -15,9 +15,10 @@
 
 .fontawesome {
   font-size: 40px;
-  transition-duration: 0.8s;
+  transition-duration: 1s;
 
   &:hover {
-    transform: rotate(360deg);
+    transform: rotate(125deg) scale(1.4);
+    color: #61dafb;
   }
 }

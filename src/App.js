@@ -8,16 +8,27 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route, BrowserRouter } from 'react-router-dom';
-
-function App() {
+// { postsData, messagesData, dialogsData }
+function App({ state, stateAddPost }) {
+  const { postsData, messagesData, dialogsData } = state;
   return (
     <BrowserRouter>
       <Header />
       <div className='grid-wrapper container'>
         <Nav />
         <div className='content'>
-          <Route path='/profile' component={Profile} />
-          <Route exact path='/dialogs' component={Dialogs} />
+          <Route
+            path='/profile'
+            render={() => (
+              <Profile postsData={postsData} stateAddPost={stateAddPost} />
+            )}
+          />
+          <Route
+            path='/dialogs'
+            render={() => (
+              <Dialogs messagesData={messagesData} dialogsData={dialogsData} />
+            )}
+          />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />
