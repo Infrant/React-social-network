@@ -2,17 +2,23 @@ import React from 'react';
 import style from './MyPosts.module.scss';
 import Post from './Post/Post';
 
-const MyPosts = ({ postsData, stateAddPost }) => {
-  const postsEl = postsData.map(post => (
-    <Post message={post.message} likesCount={post.likesCount} />
-  ));
+const MyPosts = ({ postsData, stateAddPost, newPostMsg, updateNewPostMsg }) => {
+  // const postsEl = postsData.map(post => (
+  //   <Post message={post.message} likesCount={post.likesCount} id={post.id} />
+  // ));
 
   const postText = React.createRef();
 
   const addPost = event => {
     event.preventDefault();
-    stateAddPost(postText.current.value);
-    debugger;
+    if (postText.current.value) {
+      stateAddPost();
+    }
+  };
+
+  const postChangeHandler = () => {
+    const text = postText.current.value;
+    updateNewPostMsg(text);
   };
 
   return (
@@ -20,7 +26,13 @@ const MyPosts = ({ postsData, stateAddPost }) => {
       <form className={style.sendMsgForm}>
         <h3>My posts</h3>
         <div>
-          <textarea name='' id='' cols='30' rows='3' ref={postText}></textarea>
+          <textarea
+            cols='30'
+            rows='3'
+            ref={postText}
+            value={newPostMsg}
+            onChange={postChangeHandler}
+          ></textarea>
         </div>
         <div>
           <button className={style.btn} onClick={addPost}>
@@ -28,7 +40,9 @@ const MyPosts = ({ postsData, stateAddPost }) => {
           </button>
         </div>
       </form>
-      <div className={style.posts}>{postsEl}</div>
+      <div className={style.posts}>
+        <Post postsData={postsData} />
+      </div>
     </div>
   );
 };
