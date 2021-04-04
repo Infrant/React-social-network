@@ -1,24 +1,25 @@
 import React from 'react';
+import { addPostAC, updateNewPostMsgAC } from '../../../redux/profile-reducer';
 import style from './MyPosts.module.scss';
 import Post from './Post/Post';
 
-const MyPosts = ({ postsData, stateAddPost, newPostMsg, updateNewPostMsg }) => {
+const MyPosts = ({ postsData, newPostMsg, dispatch }) => {
   // const postsEl = postsData.map(post => (
   //   <Post message={post.message} likesCount={post.likesCount} id={post.id} />
   // ));
 
-  const postText = React.createRef();
+  // const postText = React.createRef();
 
-  const addPost = event => {
-    event.preventDefault();
-    if (postText.current.value) {
-      stateAddPost();
-    }
+  const addPost = e => {
+    e.preventDefault();
+    dispatch(addPostAC());
+    // stateAddPost();
   };
 
-  const postChangeHandler = () => {
-    const text = postText.current.value;
-    updateNewPostMsg(text);
+  const postChangeHandler = e => {
+    const text = e.target.value;
+    dispatch(updateNewPostMsgAC(text));
+    // updateNewPostMsg(text);
   };
 
   return (
@@ -29,7 +30,7 @@ const MyPosts = ({ postsData, stateAddPost, newPostMsg, updateNewPostMsg }) => {
           <textarea
             cols='30'
             rows='3'
-            ref={postText}
+            // ref={postText}
             value={newPostMsg}
             onChange={postChangeHandler}
           ></textarea>

@@ -2,12 +2,21 @@ import style from './Dialogs.module.scss';
 import Dialog from './Dialog/Dialog';
 import Message from './Message/Message';
 import React from 'react';
+import {
+  addDialogMsgAC,
+  updateNewDialogMsgAC,
+} from '../../redux/dialogs-reducer';
 
-const Dialogs = ({ messagesData, dialogsData }) => {
-  const msgText = React.createRef();
+const Dialogs = ({ messagesData, dialogsData, newDialogMsg, dispatch }) => {
+  // const msgText = React.createRef();
 
-  const sendMsg = () => {
-    alert(msgText.current.value);
+  const sendMsg = e => {
+    dispatch(addDialogMsgAC());
+  };
+
+  const updateNewDialogMsg = e => {
+    const text = e.target.value;
+    dispatch(updateNewDialogMsgAC(text));
   };
 
   return (
@@ -18,7 +27,11 @@ const Dialogs = ({ messagesData, dialogsData }) => {
       <div className={style.messages}>
         <Message messagesData={messagesData} />
         <div>
-          <textarea ref={msgText} />
+          <textarea
+            onChange={updateNewDialogMsg}
+            // ref={msgText}
+            value={newDialogMsg}
+          />
         </div>
         <div>
           <button onClick={sendMsg}>send message</button>

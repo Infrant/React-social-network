@@ -8,8 +8,8 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route, BrowserRouter } from 'react-router-dom';
-// { postsData, messagesData, dialogsData }
-function App({ state, stateAddPost, updateNewPostMsg }) {
+
+function App({ state, dispatch }) {
   const { profilePage, dialogsPage } = state;
   return (
     <BrowserRouter>
@@ -22,9 +22,8 @@ function App({ state, stateAddPost, updateNewPostMsg }) {
             render={() => (
               <Profile
                 postsData={profilePage.postsData}
-                stateAddPost={stateAddPost}
                 newPostMsg={profilePage.newPostMsg}
-                updateNewPostMsg={updateNewPostMsg}
+                dispatch={dispatch}
               />
             )}
           />
@@ -34,6 +33,8 @@ function App({ state, stateAddPost, updateNewPostMsg }) {
               <Dialogs
                 messagesData={dialogsPage.messagesData}
                 dialogsData={dialogsPage.dialogsData}
+                newDialogMsg={dialogsPage.newDialogMsg}
+                dispatch={dispatch}
               />
             )}
           />
