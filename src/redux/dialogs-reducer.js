@@ -19,8 +19,10 @@ const initialState = {
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_NEW_DIALOG_MSG:
-      state.newDialogMsg = action.text;
-      break;
+      return {
+        ...state,
+        newDialogMsg: action.text,
+      };
 
     case STATE_ADD_DIALOG_MSG:
       if (state.newDialogMsg) {
@@ -28,10 +30,12 @@ const dialogsReducer = (state = initialState, action) => {
           id: state.messagesData.length + 1,
           message: state.newDialogMsg,
         };
-        state.messagesData.push(newMsg);
-        state.newDialogMsg = '';
+        return {
+          ...state,
+          messagesData: [...state.messagesData, newMsg],
+          newDialogMsg: '',
+        };
       }
-      break;
   }
   return state;
 };

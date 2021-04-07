@@ -4,6 +4,7 @@ import Message from './Message/Message';
 import React from 'react';
 
 const Dialogs = ({ sendMsgContainer, updateNewDialogMsgContainer, state }) => {
+  debugger;
   const sendMsg = e => {
     sendMsgContainer();
   };

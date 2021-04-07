@@ -18,14 +18,18 @@ const profileReducer = (state = initialState, action) => {
           message: state.newPostMsg,
           likesCount: Math.round(Math.random() * 20),
         };
-        state.postsData.push(newPost);
-        state.newPostMsg = '';
+        return {
+          ...state,
+          postsData: [...state.postsData, newPost],
+          newPostMsg: '',
+        };
       }
-      break;
 
     case UPDATE_NEW_POST_MSG:
-      state.newPostMsg = action.text;
-      break;
+      return {
+        ...state,
+        newPostMsg: action.text,
+      };
   }
   return state;
 };
