@@ -1,25 +1,16 @@
 import React from 'react';
-import { addPostAC, updateNewPostMsgAC } from '../../../redux/profile-reducer';
 import style from './MyPosts.module.scss';
 import Post from './Post/Post';
 
-const MyPosts = ({ postsData, newPostMsg, dispatch }) => {
-  // const postsEl = postsData.map(post => (
-  //   <Post message={post.message} likesCount={post.likesCount} id={post.id} />
-  // ));
-
-  // const postText = React.createRef();
-
+const MyPosts = ({ addPostContainer, postChangeHandlerContainer, state }) => {
   const addPost = e => {
     e.preventDefault();
-    dispatch(addPostAC());
-    // stateAddPost();
+    addPostContainer();
   };
 
   const postChangeHandler = e => {
     const text = e.target.value;
-    dispatch(updateNewPostMsgAC(text));
-    // updateNewPostMsg(text);
+    postChangeHandlerContainer(text);
   };
 
   return (
@@ -30,8 +21,7 @@ const MyPosts = ({ postsData, newPostMsg, dispatch }) => {
           <textarea
             cols='30'
             rows='3'
-            // ref={postText}
-            value={newPostMsg}
+            value={state.newPostMsg}
             onChange={postChangeHandler}
           ></textarea>
         </div>
@@ -42,7 +32,7 @@ const MyPosts = ({ postsData, newPostMsg, dispatch }) => {
         </div>
       </form>
       <div className={style.posts}>
-        <Post postsData={postsData} />
+        <Post postsData={state.postsData} />
       </div>
     </div>
   );

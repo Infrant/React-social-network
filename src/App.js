@@ -3,14 +3,14 @@ import './App.scss';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route, BrowserRouter } from 'react-router-dom';
 
-function App({ state, dispatch }) {
-  const { profilePage, dialogsPage } = state;
+function App({ state, dispatch, store }) {
+  // const { profilePage, dialogsPage } = state;
   return (
     <BrowserRouter>
       <Header />
@@ -21,20 +21,22 @@ function App({ state, dispatch }) {
             path='/profile'
             render={() => (
               <Profile
-                postsData={profilePage.postsData}
-                newPostMsg={profilePage.newPostMsg}
-                dispatch={dispatch}
+                // postsData={profilePage.postsData}
+                // newPostMsg={profilePage.newPostMsg}
+                // dispatch={dispatch}
+                store={store}
               />
             )}
           />
           <Route
             path='/dialogs'
             render={() => (
-              <Dialogs
-                messagesData={dialogsPage.messagesData}
-                dialogsData={dialogsPage.dialogsData}
-                newDialogMsg={dialogsPage.newDialogMsg}
-                dispatch={dispatch}
+              <DialogsContainer
+                // messagesData={dialogsPage.messagesData}
+                // dialogsData={dialogsPage.dialogsData}
+                // newDialogMsg={dialogsPage.newDialogMsg}
+                // dispatch={dispatch}
+                store={store}
               />
             )}
           />

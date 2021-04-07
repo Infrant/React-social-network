@@ -5,7 +5,6 @@
 
 import dialogsReducer from './dialogs-reducer';
 import profileReducer from './profile-reducer';
-
 const store = {
   _state: {
     profilePage: {
@@ -42,8 +41,8 @@ const store = {
   },
 
   dispatch(action) {
-    this._state.profilePage = profileReducer(this._state.profilePage, action);
-    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    profileReducer(this._state.profilePage, action);
+    dialogsReducer(this._state.dialogsPage, action);
     this._callSubscriber(this.getState());
     // if (action.type === 'STATE-ADD-POST') {
     //   const newPost = {
