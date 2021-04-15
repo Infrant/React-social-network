@@ -40,7 +40,7 @@ export const addPostAC = () => ({
 
 export const updateNewPostMsgAC = text => ({
   type: UPDATE_NEW_POST_MSG,
-  text: text,
+  text,
 });
 
 export default profileReducer;

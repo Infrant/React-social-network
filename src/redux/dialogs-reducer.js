@@ -42,7 +42,7 @@ const dialogsReducer = (state = initialState, action) => {
 
 export const updateNewDialogMsgAC = text => ({
   type: UPDATE_NEW_DIALOG_MSG,
-  text: text,
+  text,
 });
 
 export const addDialogMsgAC = () => ({

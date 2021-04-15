@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+
+.activePage {
+  font-weight: bold;
+}
+.paginationEl {
+  cursor: pointer;
+  word-wrap: break-word;
+
+  &:not(:last-child) {
+    margin-right: 5px;
+  }
+}
+.userImg {
+  border-radius: 50%;
+}

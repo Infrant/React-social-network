@@ -22,6 +22,15 @@ const Nav = () => {
           <i className='fas fa-comment'></i> Messages
         </div>
       </NavLink>
+      <NavLink
+        to='/users'
+        className={style.link}
+        activeClassName={style.active}
+      >
+        <div>
+          <i className='fas fa-users'></i>Users
+        </div>
+      </NavLink>
       <NavLink to='/news' className={style.link} activeClassName={style.active}>
         <div>
           <i className='fas fa-newspaper'></i> News

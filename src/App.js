@@ -8,6 +8,7 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route, BrowserRouter } from 'react-router-dom';
+import UsersContainer from './components/Users/UsersContainer';
 
 function App({ state, dispatch, store }) {
   // const { profilePage, dialogsPage } = state;
@@ -17,29 +18,9 @@ function App({ state, dispatch, store }) {
       <div className='grid-wrapper container'>
         <Nav />
         <div className='content'>
-          <Route
-            path='/profile'
-            render={() => (
-              <Profile
-                // postsData={profilePage.postsData}
-                // newPostMsg={profilePage.newPostMsg}
-                // dispatch={dispatch}
-                store={store}
-              />
-            )}
-          />
-          <Route
-            path='/dialogs'
-            render={() => (
-              <DialogsContainer
-                // messagesData={dialogsPage.messagesData}
-                // dialogsData={dialogsPage.dialogsData}
-                // newDialogMsg={dialogsPage.newDialogMsg}
-                // dispatch={dispatch}
-                store={store}
-              />
-            )}
-          />
+          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/dialogs' render={() => <DialogsContainer />} />
+          <Route path='/users' render={() => <UsersContainer />} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/settings' component={Settings} />
