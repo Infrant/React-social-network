@@ -1,5 +1,6 @@
 const STATE_ADD_POST = 'STATE-ADD-POST';
 const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
 const initialState = {
   postsData: [
@@ -7,6 +8,7 @@ const initialState = {
     { id: 2, message: 'Dudes, how are u?', likesCount: 11 },
   ],
   newPostMsg: 'Каничуа',
+  profile: null,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -30,6 +32,12 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         newPostMsg: action.text,
       };
+
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.profile,
+      };
   }
   return state;
 };
@@ -42,5 +50,7 @@ export const updateNewPostMsgAC = text => ({
   type: UPDATE_NEW_POST_MSG,
   text,
 });
+
+export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile });
 
 export default profileReducer;

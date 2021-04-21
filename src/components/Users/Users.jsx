@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import { urlApi } from '../../constants';
 import style from './Users.module.scss';
 
 const Users = props => {
@@ -9,8 +12,9 @@ const Users = props => {
   return (
     <>
       <div>
-        {pages.map(page => (
+        {pages.map((page, idx) => (
           <span
+            key={idx}
             onClick={() => props.setCurrentpage(page)}
             className={`
                 ${props.currentPage === page ? style.activePage : ''} ${
@@ -24,24 +28,56 @@ const Users = props => {
       {props.users.map(user => {
         return (
           <div key={user.id}>
-            <img
-              className={style.userImg}
-              src={
-                user.photos.small ||
-                'https://imgholder.ru/100x100/8493a8/adb9ca&text=IMAGE+HOLDER&font=kelson'
-              }
-              alt=''
-            />{' '}
+            <NavLink to={`/profile/${user.id}`}>
+              <img
+                className={style.userImg}
+                src={
+                  user.photos.small ||
+                  'https://imgholder.ru/100x100/8493a8/adb9ca&text=IMAGE+HOLDER&font=kelson'
+                }
+                alt=''
+              />
+            </NavLink>
             <br />
             {user.name} <br />
             {user.followed ? (
-              <button onClick={() => props.unfollowContainer(user.id)}>
+              <button
+                onClick={() => {
+                  axios
+                    .delete(`${urlApi}/follow/${user.id}`, {
+                      withCredentials: true,
+                      headers: {
+                        'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
+                      },
+                    })
+                    .then(response => {
+                      if (response.data.resultCode === 0) {
+                        props.unfollow(user.id);
+                      }
+                    });
+                }}
+              >
                 unfollow
               </button>
             ) : (
               <button
                 onClick={() => {
-                  props.followContainer(user.id);
+                  axios
+                    .post(
+                      `${urlApi}/follow/${user.id}`,
+                      {},
+                      {
+                        withCredentials: true,
+                        headers: {
+                          'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
+                        },
+                      }
+                    )
+                    .then(response => {
+                      if (response.data.resultCode === 0) {
+                        props.follow(user.id);
+                      }
+                    });
                 }}
               >
                 follow

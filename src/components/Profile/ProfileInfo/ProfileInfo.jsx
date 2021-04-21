@@ -1,6 +1,6 @@
 import style from './ProfileInfo.module.scss';
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ profile }) => {
   return (
     <>
       <div>
@@ -10,7 +10,13 @@ const ProfileInfo = () => {
           alt='photo'
         />
       </div>
-      <div>ava + desription</div>
+      <div>
+        <div>
+          <img src={profile?.photos.large} alt='' />
+          <span>{profile?.fullName}</span>
+        </div>
+        ava + desription
+      </div>
     </>
   );
 };
