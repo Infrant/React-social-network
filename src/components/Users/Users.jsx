@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import { usersAPI } from '../../api/api';
 import { urlApi } from '../../constants';
 import style from './Users.module.scss';
 
@@ -42,43 +43,51 @@ const Users = props => {
             {user.name} <br />
             {user.followed ? (
               <button
-                onClick={() => {
-                  axios
-                    .delete(`${urlApi}/follow/${user.id}`, {
-                      withCredentials: true,
-                      headers: {
-                        'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
-                      },
-                    })
-                    .then(response => {
-                      if (response.data.resultCode === 0) {
-                        props.unfollow(user.id);
-                      }
-                    });
-                }}
+                disabled={props.followingProgress.some(id => id == user.id)}
+                onClick={
+                  () => props.unfollow(user.id)
+                  // props.toggleFollowingProgress(true, user.id);
+                  // axios
+                  //   .delete(`${urlApi}/follow/${user.id}`, {
+                  //     withCredentials: true,
+                  //     headers: {
+                  //       'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
+                  //     },
+                  //   })
+                  // usersAPI.unfollow(user.id).then(response => {
+                  //   if (response.data.resultCode === 0) {
+                  //     props.unfollowAccess(user.id);
+                  //   }
+                  //   props.toggleFollowingProgress(false, user.id);
+                  // });
+                }
               >
                 unfollow
               </button>
             ) : (
               <button
-                onClick={() => {
-                  axios
-                    .post(
-                      `${urlApi}/follow/${user.id}`,
-                      {},
-                      {
-                        withCredentials: true,
-                        headers: {
-                          'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
-                        },
-                      }
-                    )
-                    .then(response => {
-                      if (response.data.resultCode === 0) {
-                        props.follow(user.id);
-                      }
-                    });
-                }}
+                disabled={props.followingProgress.some(id => id == user.id)}
+                onClick={
+                  () => props.follow(user.id)
+                  // props.toggleFollowingProgress(true, user.id);
+                  // axios
+                  //   .post(
+                  //     `${urlApi}/follow/${user.id}`,
+                  //     {},
+                  //     {
+                  //       withCredentials: true,
+                  //       headers: {
+                  //         'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
+                  //       },
+                  //     }
+                  //   )
+                  // usersAPI.follow(user.id).then(response => {
+                  //   if (response.data.resultCode === 0) {
+                  //     props.followAccess(user.id);
+                  //   }
+                  //   props.toggleFollowingProgress(false, user.id);
+                  // });
+                }
               >
                 follow
               </button>
