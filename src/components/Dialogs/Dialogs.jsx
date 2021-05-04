@@ -2,9 +2,15 @@ import style from './Dialogs.module.scss';
 import Dialog from './Dialog/Dialog';
 import Message from './Message/Message';
 import React from 'react';
+import { Redirect } from 'react-router';
 
-const Dialogs = ({ sendMsgContainer, updateNewDialogMsgContainer, state }) => {
-  const sendMsg = e => {
+const Dialogs = ({
+  sendMsgContainer,
+  updateNewDialogMsgContainer,
+  state,
+  isAuth,
+}) => {
+  const sendMsg = () => {
     sendMsgContainer();
   };
 
@@ -12,6 +18,8 @@ const Dialogs = ({ sendMsgContainer, updateNewDialogMsgContainer, state }) => {
     const text = e.target.value;
     updateNewDialogMsgContainer(text);
   };
+
+  if (!isAuth) return <Redirect to='/login' />;
 
   return (
     <div className={style.dialogs}>

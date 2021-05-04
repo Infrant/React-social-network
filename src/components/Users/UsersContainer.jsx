@@ -1,4 +1,3 @@
-import * as axios from 'axios';
 import { connect } from 'react-redux';
 import React from 'react';
 import {
@@ -9,6 +8,7 @@ import {
 } from '../../redux/users-reducer';
 import Users from './Users';
 import Loader from '../common/Loader';
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -70,7 +70,7 @@ export default connect(mapStateToProps, {
   unfollow,
   toggleFollowingProgress,
   getUsers,
-})(UsersContainer);
+})(withAuthRedirect(UsersContainer));
 
 // const mapDispatchToProps = dispatch => {
 //   return {

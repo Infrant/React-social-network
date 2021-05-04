@@ -1,22 +1,11 @@
-import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
-import { urlApi } from '../../constants';
-import { setUserData } from '../../redux/auth-reducer';
+import { isAuthorized } from '../../redux/auth-reducer';
 import Header from './Header';
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
-    axios
-      .get(`${urlApi}/auth/me`, {
-        withCredentials: true,
-      })
-      .then(response => {
-        if (response.data.resultCode === 0) {
-          const { id, login, email } = response.data.data;
-          this.props.setUserData(id, login, email);
-        }
-      });
+    this.props.isAuthorized();
   }
 
   render() {
@@ -29,4 +18,4 @@ const mapStateToProps = state => ({
   login: state.auth.login,
 });
 
-export default connect(mapStateToProps, { setUserData })(HeaderContainer);
+export default connect(mapStateToProps, { isAuthorized })(HeaderContainer);

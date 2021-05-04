@@ -1,7 +1,4 @@
-import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
-import { urlApi } from '../../constants';
 import style from './Users.module.scss';
 
 const Users = props => {

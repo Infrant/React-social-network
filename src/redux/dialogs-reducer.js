@@ -36,8 +36,10 @@ const dialogsReducer = (state = initialState, action) => {
           newDialogMsg: '',
         };
       }
+
+    default:
+      return state;
   }
-  return state;
 };
 
 export const updateNewDialogMsgAC = text => ({

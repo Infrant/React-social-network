@@ -4,28 +4,7 @@ import {
   updateNewDialogMsgAC,
 } from '../../redux/dialogs-reducer';
 import { connect } from 'react-redux';
-import store from '../../redux/redux-store';
-
-// const DialogsContainer = ({ store }) => {
-//   const state = store.getState().dialogsPage;
-//   const { dispatch } = store;
-
-//   const sendMsgContainer = () => {
-//     dispatch(addDialogMsgAC());
-//   };
-
-//   const updateNewDialogMsgContainer = text => {
-//     dispatch(updateNewDialogMsgAC(text));
-//   };
-
-//   return (
-//     <Dialogs
-//       sendMsgContainer={sendMsgContainer}
-//       updateNewDialogMsgContainer={updateNewDialogMsgContainer}
-//       state={state}
-//     />
-//   );
-// };
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
 
 const mapSateToProps = state => {
   return {
@@ -44,6 +23,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const DialogsContainer = connect(mapSateToProps, mapDispatchToProps)(Dialogs);
+const AuthRedirectComponent = withAuthRedirect(Dialogs);
+
+const DialogsContainer = connect(
+  mapSateToProps,
+  mapDispatchToProps
+)(AuthRedirectComponent);
 
 export default DialogsContainer;

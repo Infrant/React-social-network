@@ -1,3 +1,5 @@
+import { usersAPI } from '../api/api';
+
 const STATE_ADD_POST = 'STATE-ADD-POST';
 const UPDATE_NEW_POST_MSG = 'UPDATE-NEW-POST-MSG';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -38,8 +40,10 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         profile: action.profile,
       };
+
+    default:
+      return state;
   }
-  return state;
 };
 
 export const addPostAC = () => ({
@@ -52,5 +56,14 @@ export const updateNewPostMsgAC = text => ({
 });
 
 export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile });
+
+export const getUserProfile = paramsUserId => {
+  return dispatch => {
+    const userId = paramsUserId ? paramsUserId : '16430';
+    usersAPI.getProfile(userId).then(response => {
+      dispatch(setUserProfile(response.data));
+    });
+  };
+};
 
 export default profileReducer;
