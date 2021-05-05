@@ -1,7 +1,7 @@
 import style from './ProfileInfo.module.scss';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 
-const ProfileInfo = ({ profile }) => {
+const ProfileInfo = ({ profile, status, updateProfileStatus }) => {
   return (
     <>
       <div>
@@ -14,10 +14,15 @@ const ProfileInfo = ({ profile }) => {
       <div>
         <div>
           <img src={profile?.photos.large} alt='' />
-          <span>{profile?.fullName}</span>
+          <div>
+            <span>{profile?.fullName}</span>
+          </div>
         </div>
         <div>
-          <ProfileStatus status='my status' />
+          <ProfileStatus
+            status={status}
+            updateProfileStatus={updateProfileStatus}
+          />
         </div>
       </div>
     </>
