@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import style from './Header.module.scss';
 
-const Header = ({ isAuth, login }) => {
+const Header = ({ isAuth, login, logout }) => {
   return (
     <header className={style.header}>
       <div className={style.headerWrapper}>
@@ -10,7 +10,10 @@ const Header = ({ isAuth, login }) => {
         </a>
         <div className={style.login}>
           {isAuth ? (
-            <NavLink to={'/profile'}>{login}</NavLink>
+            <>
+              <NavLink to={'/profile'}>{login}</NavLink>
+              <button onClick={logout}>logout</button>
+            </>
           ) : (
             <NavLink to={'/login'}>login</NavLink>
           )}

@@ -1,36 +1,44 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { FormControl } from '../../common/FormControls/FormControl';
+import { maxLength, required } from '../../utils/validators/validators';
 import style from './MyPosts.module.scss';
 import Post from './Post/Post';
 
-const MyPosts = ({ addPostContainer, postChangeHandlerContainer, state }) => {
-  const addPost = e => {
-    e.preventDefault();
-    addPostContainer();
-  };
+const maxLength10 = maxLength(10);
 
-  const postChangeHandler = e => {
-    const text = e.target.value;
-    postChangeHandlerContainer(text);
+const MyPostsForm = props => {
+  const { handleSubmit } = props;
+  return (
+    <form className={style.sendMsgForm} onSubmit={handleSubmit}>
+      <h3>My posts</h3>
+      <div>
+        <Field
+          cols='30'
+          rows='3'
+          component={FormControl}
+          name={'newPostText'}
+          validate={[required, maxLength10]}
+          TypeField='textarea'
+        />
+      </div>
+      <div>
+        <button className={style.btn}>Add post</button>
+      </div>
+    </form>
+  );
+};
+
+const MyPostsReduxForm = reduxForm({ form: 'myPosts' })(MyPostsForm);
+
+const MyPosts = ({ addPost, state }) => {
+  const onSubmit = formData => {
+    addPost(formData.newPostText);
   };
 
   return (
     <div>
-      <form className={style.sendMsgForm}>
-        <h3>My posts</h3>
-        <div>
-          <textarea
-            cols='30'
-            rows='3'
-            value={state.newPostMsg}
-            onChange={postChangeHandler}
-          ></textarea>
-        </div>
-        <div>
-          <button className={style.btn} onClick={addPost}>
-            Add post
-          </button>
-        </div>
-      </form>
+      <MyPostsReduxForm onSubmit={onSubmit} />
       <div className={style.posts}>
         <Post postsData={state.postsData} />
       </div>

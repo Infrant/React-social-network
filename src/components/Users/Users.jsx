@@ -40,7 +40,7 @@ const Users = props => {
             {user.name} <br />
             {user.followed ? (
               <button
-                disabled={props.followingProgress.some(id => id == user.id)}
+                disabled={props.followingProgress.some(id => id === user.id)}
                 onClick={
                   () => props.unfollow(user.id)
                   // props.toggleFollowingProgress(true, user.id);
@@ -63,7 +63,7 @@ const Users = props => {
               </button>
             ) : (
               <button
-                disabled={props.followingProgress.some(id => id == user.id)}
+                disabled={props.followingProgress.some(id => id === user.id)}
                 onClick={
                   () => props.follow(user.id)
                   // props.toggleFollowingProgress(true, user.id);
@@ -91,7 +91,7 @@ const Users = props => {
             )}
             <br />
             status: {user.status} <br />
-            {'user.location.country' + ', ' + 'user.location.city'}
+            user.location.country and user.location.city
             <hr />
           </div>
         );
