@@ -1,5 +1,5 @@
 import './App.scss';
-
+import { useEffect } from 'react';
 import Nav from './components/Nav/Nav';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
@@ -10,9 +10,13 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
+import { connect } from 'react-redux';
+import { initializeApp } from './redux/app-reducer';
+import Loader from './components/common/Loader/Loader';
 
-function App({ state, dispatch, store }) {
-  // const { profilePage, dialogsPage } = state;
+const App = props => {
+  useEffect(() => props.initializeApp(), []);
+  if (!props.isInitialized) return <Loader />;
   return (
     <BrowserRouter>
       <HeaderContainer />
@@ -30,6 +34,10 @@ function App({ state, dispatch, store }) {
       </div>
     </BrowserRouter>
   );
-}
+};
 
-export default App;
+const mapStateToProps = state => ({
+  isInitialized: state.app.isInitialized,
+});
+
+export default connect(mapStateToProps, { initializeApp })(App);
