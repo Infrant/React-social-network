@@ -31,7 +31,8 @@ const MyPostsForm = props => {
 
 const MyPostsReduxForm = reduxForm({ form: 'myPosts' })(MyPostsForm);
 
-const MyPosts = ({ addPost, state }) => {
+const MyPosts = ({ addPost, postsData }) => {
+  console.log('render');
   const onSubmit = formData => {
     addPost(formData.newPostText);
   };
@@ -40,7 +41,7 @@ const MyPosts = ({ addPost, state }) => {
     <div>
       <MyPostsReduxForm onSubmit={onSubmit} />
       <div className={style.posts}>
-        <Post postsData={state.postsData} />
+        <Post postsData={postsData} />
       </div>
     </div>
   );
