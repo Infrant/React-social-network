@@ -1,15 +1,23 @@
 import { NavLink } from 'react-router-dom';
+import Loader from '../common/Loader/Loader';
+import Paginator from '../common/Paginator/Paginator';
 import style from './Users.module.scss';
 
 const Users = props => {
-  let pagesTotal = Math.ceil(props.totalUsersCount / props.pageSize);
-  const pages = [];
-  for (let i = 1; i <= pagesTotal; i++) {
-    pages.push(i);
-  }
+  // let pagesTotal = Math.ceil(props.totalUsersCount / props.pageSize);
+  // const pages = [];
+  // for (let i = 1; i <= pagesTotal; i++) {
+  //   pages.push(i);
+  // }
   return (
     <>
-      <div>
+      <Paginator
+        totalItemsCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        setCurrentpage={props.setCurrentpage}
+        currentPage={props.currentPage}
+      />
+      {/* <div>
         {pages.map((page, idx) => (
           <span
             key={idx}
@@ -22,80 +30,54 @@ const Users = props => {
             {` ${page},`}&nbsp;
           </span>
         ))}
-      </div>
-      {props.users.map(user => {
-        return (
-          <div key={user.id}>
-            <NavLink to={`/profile/${user.id}`}>
-              <img
-                className={style.userImg}
-                src={
-                  user.photos.small ||
-                  'https://imgholder.ru/100x100/8493a8/adb9ca&text=IMAGE+HOLDER&font=kelson'
-                }
-                alt=''
-              />
-            </NavLink>
-            <br />
-            {user.name} <br />
-            {user.followed ? (
-              <button
-                disabled={props.followingProgress.some(id => id === user.id)}
-                onClick={
-                  () => props.unfollow(user.id)
-                  // props.toggleFollowingProgress(true, user.id);
-                  // axios
-                  //   .delete(`${urlApi}/follow/${user.id}`, {
-                  //     withCredentials: true,
-                  //     headers: {
-                  //       'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
-                  //     },
-                  //   })
-                  // usersAPI.unfollow(user.id).then(response => {
-                  //   if (response.data.resultCode === 0) {
-                  //     props.unfollowAccess(user.id);
-                  //   }
-                  //   props.toggleFollowingProgress(false, user.id);
-                  // });
-                }
-              >
-                unfollow
-              </button>
-            ) : (
-              <button
-                disabled={props.followingProgress.some(id => id === user.id)}
-                onClick={
-                  () => props.follow(user.id)
-                  // props.toggleFollowingProgress(true, user.id);
-                  // axios
-                  //   .post(
-                  //     `${urlApi}/follow/${user.id}`,
-                  //     {},
-                  //     {
-                  //       withCredentials: true,
-                  //       headers: {
-                  //         'API-KEY': 'e4e4830d-b9e4-4a7a-9698-235aa4feee3b',
-                  //       },
-                  //     }
-                  //   )
-                  // usersAPI.follow(user.id).then(response => {
-                  //   if (response.data.resultCode === 0) {
-                  //     props.followAccess(user.id);
-                  //   }
-                  //   props.toggleFollowingProgress(false, user.id);
-                  // });
-                }
-              >
-                follow
-              </button>
-            )}
-            <br />
-            status: {user.status} <br />
-            user.location.country and user.location.city
-            <hr />
-          </div>
-        );
-      })}
+      </div> */}
+      {props.isLoading ? (
+        <Loader />
+      ) : (
+        <div className={style.usersWrapper}>
+          {props.users.map(user => {
+            return (
+              <div key={user.id}>
+                <NavLink to={`/profile/${user.id}`}>
+                  <img
+                    className={style.userImg}
+                    src={
+                      user.photos.small ||
+                      'https://imgholder.ru/100x100/8493a8/adb9ca&text=IMAGE+HOLDER&font=kelson'
+                    }
+                    alt=''
+                  />
+                </NavLink>
+                <br />
+                {user.name} <br />
+                {user.followed ? (
+                  <button
+                    disabled={props.followingProgress.some(
+                      id => id === user.id
+                    )}
+                    onClick={() => props.unfollow(user.id)}
+                  >
+                    unfollow
+                  </button>
+                ) : (
+                  <button
+                    disabled={props.followingProgress.some(
+                      id => id === user.id
+                    )}
+                    onClick={() => props.follow(user.id)}
+                  >
+                    follow
+                  </button>
+                )}
+                <br />
+                status: {user.status} <br />
+                user.location.country and user.location.city
+                <hr />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };

@@ -35,22 +35,23 @@ class UsersContainer extends React.Component {
 
   render() {
     return (
-      <>
-        {this.props.isLoading ? (
-          <Loader />
-        ) : (
-          <Users
-            users={this.props.users}
-            currentPage={this.props.currentPage}
-            totalUsersCount={this.props.totalUsersCount}
-            pageSize={this.props.pageSize}
-            setCurrentpage={this.setCurrentpage}
-            follow={this.props.follow}
-            unfollow={this.props.unfollow}
-            followingProgress={this.props.followingProgress}
-          />
-        )}
-      </>
+      // <>
+      //   {this.props.isLoading ? (
+      //     <Loader />
+      //   ) : (
+      <Users
+        users={this.props.users}
+        currentPage={this.props.currentPage}
+        totalUsersCount={this.props.totalUsersCount}
+        pageSize={this.props.pageSize}
+        setCurrentpage={this.setCurrentpage}
+        follow={this.props.follow}
+        unfollow={this.props.unfollow}
+        followingProgress={this.props.followingProgress}
+        isLoading={this.props.isLoading}
+      />
+      //   )}
+      // </>
     );
   }
 }

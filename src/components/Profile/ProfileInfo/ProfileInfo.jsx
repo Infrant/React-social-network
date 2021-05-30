@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import style from './ProfileInfo.module.scss';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 

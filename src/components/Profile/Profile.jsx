@@ -1,4 +1,5 @@
 import MyPostsContainer from './MyPosts/MyPostsContainer';
+// eslint-disable-next-line
 import style from './Profile.module.scss';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 

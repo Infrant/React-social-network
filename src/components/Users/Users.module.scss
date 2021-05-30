@@ -1,16 +1,20 @@
 @import '../../variables.scss';
 
-.activePage {
-  font-weight: bold;
-}
-.paginationEl {
-  cursor: pointer;
-  word-wrap: break-word;
+// .activePage {
+//   font-weight: bold;
+// }
+// .paginationEl {
+//   cursor: pointer;
+//   word-wrap: break-word;
 
-  &:not(:last-child) {
-    margin-right: 5px;
-  }
+//   &:not(:last-child) {
+//     margin-right: 5px;
+//   }
+// }
+.usersWrapper {
+  margin-top: 25px;
 }
+
 .userImg {
   border-radius: 50%;
 }

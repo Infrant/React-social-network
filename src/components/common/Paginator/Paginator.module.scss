@@ -1,0 +1,31 @@
+@import '../../../variables.scss';
+
+.paginatorWrapper {
+  display: flex;
+  align-items: stretch;
+
+  & button {
+    cursor: pointer;
+  }
+}
+
+.activePage {
+  font-weight: bold;
+  outline: 1px solid black !important;
+}
+.paginationEl {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 5px;
+  cursor: pointer;
+  word-wrap: break-word;
+  box-sizing: border-box;
+
+  & {
+    margin-right: 7px;
+  }
+}
+
+.leftBtn {
+  margin-right: 5px;
+}
