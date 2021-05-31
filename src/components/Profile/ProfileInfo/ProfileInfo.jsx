@@ -14,7 +14,13 @@ const ProfileInfo = ({ profile, status, updateProfileStatus }) => {
       </div>
       <div>
         <div>
-          <img src={profile?.photos.large} alt='' />
+          <img
+            src={
+              profile?.photos.large ||
+              'https://imgholder.ru/100x100/8493a8/adb9ca&text=IMAGE+HOLDER&font=kelson'
+            }
+            alt=''
+          />
           <div>
             <span>{profile?.fullName}</span>
           </div>
