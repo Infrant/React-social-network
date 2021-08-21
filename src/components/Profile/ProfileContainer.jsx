@@ -5,6 +5,7 @@ import {
   getUserProfile,
   getProfileStatus,
   updateProfileStatus,
+  updateProfilePhoto,
 } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
@@ -31,8 +32,21 @@ class ProfileContainer extends React.Component {
     }
   }
 
+  onAddProfilePhoto = event => {
+    if (event.target.files.length) {
+      this.props.updateProfilePhoto(event.target.files[0]);
+    }
+  };
+
   render() {
-    return <Profile {...this.props} />;
+    const isOwner = !this.props.match.params.userId;
+    return (
+      <Profile
+        {...this.props}
+        isOwner={isOwner}
+        onAddProfilePhoto={this.onAddProfilePhoto}
+      />
+    );
   }
 }
 
@@ -49,5 +63,6 @@ export default compose(
     getUserProfile,
     getProfileStatus,
     updateProfileStatus,
+    updateProfilePhoto,
   })
 )(ProfileContainer);

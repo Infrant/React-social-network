@@ -2,7 +2,13 @@
 import style from './ProfileInfo.module.scss';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 
-const ProfileInfo = ({ profile, status, updateProfileStatus }) => {
+const ProfileInfo = ({
+  profile,
+  status,
+  updateProfileStatus,
+  isOwner,
+  onAddProfilePhoto,
+}) => {
   return (
     <>
       <div>
@@ -21,6 +27,7 @@ const ProfileInfo = ({ profile, status, updateProfileStatus }) => {
             }
             alt=''
           />
+          {isOwner && <input type='file' onChange={onAddProfilePhoto} />}
           <div>
             <span>{profile?.fullName}</span>
           </div>
