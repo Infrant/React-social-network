@@ -66,30 +66,21 @@ export const addPost = newPostText => ({
 
 export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile });
 
-export const getUserProfile = paramsUserId => {
-  return dispatch => {
-    usersAPI.getProfile(paramsUserId).then(response => {
-      dispatch(setUserProfile(response.data));
-    });
-  };
+export const getUserProfile = paramsUserId => async dispatch => {
+  const response = await usersAPI.getProfile(paramsUserId);
+  dispatch(setUserProfile(response));
 };
 
-export const getProfileStatus = userId => {
-  return dispatch => {
-    profileAPI.getStatus(userId).then(response => {
-      dispatch(setProfileStatus(response.data));
-    });
-  };
+export const getProfileStatus = userId => async dispatch => {
+  const response = await profileAPI.getStatus(userId);
+  dispatch(setProfileStatus(response));
 };
 
-export const updateProfileStatus = status => {
-  return dispatch => {
-    profileAPI.updateStatus(status).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(setProfileStatus(status));
-      }
-    });
-  };
+export const updateProfileStatus = status => async dispatch => {
+  const response = await profileAPI.updateStatus(status);
+  if (response.resultCode === 0) {
+    dispatch(setProfileStatus(status));
+  }
 };
 
 const savePhotoSuccess = photos => ({

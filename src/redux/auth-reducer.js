@@ -28,38 +28,29 @@ export const setUserData = (userId, login, email, isAuth) => ({
   payload: { userId, login, email, isAuth },
 });
 
-export const getAuthUserData = () => {
-  return dispatch => {
-    return authAPI.auth().then(response => {
-      if (response.data.resultCode === 0) {
-        const { id, login, email } = response.data.data;
-        dispatch(setUserData(id, login, email, true));
-      }
-    });
-  };
+export const getAuthUserData = () => async dispatch => {
+  const response = await authAPI.auth();
+  if (response.resultCode === 0) {
+    const { id, login, email } = response.data;
+    dispatch(setUserData(id, login, email, true));
+  }
 };
 
-export const login = (email, password, rememberMe) => {
-  return dispatch => {
-    authAPI.login(email, password, rememberMe).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(getAuthUserData());
-      } else {
-        const error = response.data.messages[0] || 'some error';
-        dispatch(stopSubmit('login', { _error: error }));
-      }
-    });
-  };
+export const login = (email, password, rememberMe) => async dispatch => {
+  const response = await authAPI.login(email, password, rememberMe);
+  if (response.resultCode === 0) {
+    dispatch(getAuthUserData());
+  } else {
+    const error = response.messages[0] || 'some error';
+    dispatch(stopSubmit('login', { _error: error }));
+  }
 };
 
-export const logout = () => {
-  return dispatch => {
-    authAPI.logout().then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(setUserData(null, null, null, false));
-      }
-    });
-  };
+export const logout = () => async dispatch => {
+  const response = await authAPI.logout();
+  if (response.resultCode === 0) {
+    dispatch(setUserData(null, null, null, false));
+  }
 };
 
 export default authReducer;

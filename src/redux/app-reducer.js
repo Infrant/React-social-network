@@ -23,8 +23,9 @@ export const setInitialized = () => ({
   type: SET_INITIALIZED,
 });
 
-export const initializeApp = () => dispatch => {
-  dispatch(getAuthUserData()).then(() => dispatch(setInitialized()));
+export const initializeApp = () => async dispatch => {
+  await dispatch(getAuthUserData());
+  dispatch(setInitialized());
 };
 
 export default appReducer;

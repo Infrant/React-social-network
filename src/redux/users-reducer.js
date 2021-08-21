@@ -108,40 +108,31 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
   userId,
 });
 
-export const getUsers = (currentPage, pageSize) => {
-  return dispatch => {
-    dispatch(setCurrentPage(currentPage));
-    dispatch(toggleIsLoading(true));
-    usersAPI.getUsers(currentPage, pageSize).then(data => {
-      dispatch(toggleIsLoading(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    });
-  };
+export const getUsers = (currentPage, pageSize) => async dispatch => {
+  dispatch(setCurrentPage(currentPage));
+  dispatch(toggleIsLoading(true));
+  const response = await usersAPI.getUsers(currentPage, pageSize);
+  dispatch(toggleIsLoading(false));
+  dispatch(setUsers(response.items));
+  dispatch(setTotalUsersCount(response.totalCount));
 };
 
-export const follow = userId => {
-  return dispatch => {
-    dispatch(toggleFollowingProgress(true, userId));
-    usersAPI.follow(userId).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(followSuccess(userId));
-      }
-      dispatch(toggleFollowingProgress(false, userId));
-    });
-  };
+export const follow = userId => async dispatch => {
+  dispatch(toggleFollowingProgress(true, userId));
+  const response = await usersAPI.follow(userId);
+  if (response.resultCode === 0) {
+    dispatch(followSuccess(userId));
+  }
+  dispatch(toggleFollowingProgress(false, userId));
 };
 
-export const unfollow = userId => {
-  return dispatch => {
-    dispatch(toggleFollowingProgress(true, userId));
-    usersAPI.unfollow(userId).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(unfollowSuccess(userId));
-      }
-      dispatch(toggleFollowingProgress(false, userId));
-    });
-  };
+export const unfollow = userId => async dispatch => {
+  dispatch(toggleFollowingProgress(true, userId));
+  const response = await usersAPI.unfollow(userId);
+  if (response.resultCode === 0) {
+    dispatch(unfollowSuccess(userId));
+  }
+  dispatch(toggleFollowingProgress(false, userId));
 };
 
 export default usersReducer;

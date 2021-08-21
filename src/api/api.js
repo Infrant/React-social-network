@@ -15,10 +15,10 @@ export const usersAPI = {
       .then(response => response.data);
   },
   follow(userId) {
-    return instance.post(`follow/${userId}`);
+    return instance.post(`follow/${userId}`).then(response => response.data);
   },
   unfollow(userId) {
-    return instance.delete(`follow/${userId}`);
+    return instance.delete(`follow/${userId}`).then(response => response.data);
   },
   getProfile(userId) {
     console.warn('Obsolete method. Use profileAPI');
@@ -28,13 +28,17 @@ export const usersAPI = {
 
 export const profileAPI = {
   getProfile(userId) {
-    return instance.get(`profile/${userId}`);
+    return instance.get(`profile/${userId}`).then(response => response.data);
   },
   getStatus(userId) {
-    return instance.get(`profile/status/${userId}`);
+    return instance
+      .get(`profile/status/${userId}`)
+      .then(response => response.data);
   },
   updateStatus(status) {
-    return instance.put(`profile/status`, { status });
+    return instance
+      .put(`profile/status`, { status })
+      .then(response => response.data);
   },
   async savePhoto(profilePhoto) {
     const formData = new FormData();
@@ -50,12 +54,14 @@ export const profileAPI = {
 
 export const authAPI = {
   auth() {
-    return instance.get('auth/me');
+    return instance.get('auth/me').then(response => response.data);
   },
   login(email, password, rememberMe = false) {
-    return instance.post('/auth/login', { email, password, rememberMe });
+    return instance
+      .post('/auth/login', { email, password, rememberMe })
+      .then(response => response.data);
   },
   logout() {
-    return instance.delete('/auth/login');
+    return instance.delete('/auth/login').then(response => response.data);
   },
 };
